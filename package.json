@@ -17,13 +17,13 @@
     "lint": "eslint . --ext .js"
   },
   "author": "Its-Lynx",
-  "homepage": "https://github.com/Lynxcode-id/ERINE-MD#readme",
+  "homepage": "https://github.com/Lynxcode-id/Li-Shiya-MD#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Lynxcode-id/ERINE-MD.git"
+    "url": "git+https://github.com/Lynxcode-id/Li-Shiya-MD.git"
   },
   "bugs": {
-    "url": "https://github.com/Lynxcode-id/ERINE-MD/issues"
+    "url": "https://github.com/Lynxcode-id/Li-Shiya-MD/issues"
   },
   "keywords": [
     "termux-whatsapp-bot",
