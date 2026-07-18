@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="media/thumbnail.jpg" alt="Li Shiya MD Banner" width="450"/>
+  <img src="media/menu.jpg" alt="Li Shiya MD Banner" width="450"/>
 </p>
 
 <h1 align="center">🎀 Li Shiya MD v2.0 (Multi-Device) 🎀</h1>
