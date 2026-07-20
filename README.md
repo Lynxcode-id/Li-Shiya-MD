@@ -231,6 +231,7 @@ Li Shiya MD/
 <br/>
 
 **Penyebab:** Ada library yang belum terpasang atau `package.json` mengalami pembaruan.
+
 **Solusi:** Jalankan ulang `npm install` di direktori utama bot.
 </details>
 
@@ -239,6 +240,7 @@ Li Shiya MD/
 <br/>
 
 **Penyebab:** Server API tujuan menerapkan proteksi Cloudflare yang ketat sehingga mendeteksi bot sebagai bot jahat.
+
 **Solusi:** Pastikan parameter `headers` di dalam fungsi `axios.get()` menggunakan `User-Agent` terbaru seperti yang sudah diimplementasikan pada kode plugin Li Shiya MD.
 </details>
 
@@ -247,8 +249,29 @@ Li Shiya MD/
 <br/>
 
 **Penyebab:** Modul `archiver` belum terinstal secara sempurna di environment kamu.
+
 **Solusi:** Jalankan `npm install archiver` secara manual untuk memastikan pustaka tersebut terdaftar di `node_modules`.
 </details>
+
+## ⚠️ Catatan
+
+- Script bot support node.js 20-26
+- Saran gunakan node.js ( 22 ) karena bot ini stabil di node tsb
+- Gunakan sc ini dengan bijak, jangan spam fiturnya agar tetap awet!
+- Script bot ini gratis, tidak di jual!
+- Script bot ini include dengan apikey premium lynx decode
+- Jika ada keluhan atau error lapor segera agar cepat di fix
+- Jika bot tidak merespon, Tunggu beberapa saat.
+- Kalau ingin terus project ini berlanjut, jangan lupa donasi ya.
+- Thanks to team develop inf dan inf project
+- Script ini ada anti newsletter asing mohon, mohon maaf jangan gunakan sc di no nomor pribadi kalian karena bisa mengunfollow saluran kalian terimss atas pengertiannya
+- Mohon maaf juga jika newsletter yang kami izinkan hanya inf project dan inf project share code 🙏😁
+- Ingin script ini versi no enc? ketik .sc di situ akan tertera harganya
+- Script bot ini di rancang agar stabil dan ringan serta fast, kami tidak mengejar banyak plugin di bot ini jadi jangan berharap banyak !
+- Script bot ini juga memakai sistem load plugin agar penggunaan, cpu dan ram supaya tidak jebol/terlalu tinggi
+- Terima kasih juga untuk penyedia baileys dan base script ini
+
+---
 
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.gif" width="100%" height="6px">
 
