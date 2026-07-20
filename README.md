@@ -258,7 +258,7 @@ Li Shiya MD/
 - Script bot support node.js 20-26
 - Saran gunakan node.js ( 22 ) karena bot ini stabil di node tsb
 - Gunakan sc ini dengan bijak, jangan spam fiturnya agar tetap awet!
-- Script bot ini gratis, tidak di jual!
+- Script bot versi github release gratis, tidak di jual!
 - Script bot ini include dengan apikey premium lynx decode
 - Jika ada keluhan atau error lapor segera agar cepat di fix
 - Jika bot tidak merespon, Tunggu beberapa saat.
