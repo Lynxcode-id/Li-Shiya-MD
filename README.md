@@ -17,7 +17,7 @@
 </p>
 
 <p align="center">
-<a href="https://whatsapp.com/channel/0029Vb5rT77Ae5Vqi7s27P3L"><img src="https://img.shields.io/badge/CHANNEL%20WHATSAPP-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" height="32"/></a>
+<a href="https://whatsapp.com/channel/0029VbAnuii6GcGCu73oep1i"><img src="https://img.shields.io/badge/CHANNEL%20WHATSAPP-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" height="32"/></a>
 </p>
 
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.gif" width="100%" height="6px">
@@ -289,7 +289,7 @@ Pengembangan proyek ini tidak lepas dari kontribusi komunitas open-source WhatsA
 </p>
 
 <p align="center">
-<a href="https://whatsapp.com/channel/0029Vb5rT77Ae5Vqi7s27P3L"><img src="https://img.shields.io/badge/Join%20Channel-INF%20Project-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" height="36"/></a>
+<a href="https://whatsapp.com/channel/0029VbAnuii6GcGCu73oep1i"><img src="https://img.shields.io/badge/Join%20Channel-INF%20Project-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" height="36"/></a>
 &nbsp;
 <a href="https://saweria.co/LynxPreset"><img src="https://img.shields.io/badge/Support-Saweria-FF4500?style=for-the-badge&logo=ko-fi&logoColor=white" height="36"/></a>
 </p>
