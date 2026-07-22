@@ -3,15 +3,17 @@ import chalk from 'chalk';
 import { fileURLToPath } from 'url';
 
 global.pairingNumber = 628211297179; // no bot - untuk pairing !!
-global.owner = [['6288258041396', 'Lynx decode', true]]; // ganti no owner
+global.owner = [['6288258041396', 'Lynx decode', true]]; // no owner bot
 
-global.ownerbackup = '628211297179' // Taruh nomor kamu di sini
-global.namebot = 'ʟɪ-sʜɪʏᴀ ᴇsᴍ'; // nama bot
-global.author = 'Lynx decode'; // ganti nama owner
-global.source = 'https://whatsapp.com/channel/0029VbAnuii6GcGCu73oep1i/2976'; // link gc dll bebas
+global.namebot = 'ʟɪ-sʜɪʏᴀ ᴇsᴍ'; // nama bot 
+global.author = 'Lynx decode'; // nama owner sesuaikan
+global.thumbnail = 'https://raw.githubusercontent.com/Lynxcode-id/picture/main/1784468420522.jpeg' // url thumbnail untuk menu utama
+global.thumbnail2 = 'https://raw.githubusercontent.com/Lynxcode-id/picture/main/1784512578790.jpeg' // url thumbnail untuk menu kedua
+global.thumbvid = 'https://c.termai.cc/v142/WFdf.mp4' // url vidio untuk menu utama
+global.source = 'https://whatsapp.com/channel/0029VbAnuii6GcGCu73oep1i/2976'; // linkgc, saluran atau apapun bebas..
 
-global.wait = 'Tunggu sebentar sayang lagi di proses...';
-global.eror = 'Terjadi Kesalahan nih...';
+global.wait = 'Tunggu sebentar sayang lagi di proses...'; // pesan ketika memporses..
+global.eror = 'Terjadi Kesalahan nih...'; // pesan jika fitur error
 
 global.pakasir = {
 	slug: 'kilersbotz',
@@ -19,15 +21,17 @@ global.pakasir = {
 	expired: 30,
 };
 
-global.menuAudio = [
-'https://c.termai.cc/a190/FLdf.mp3' // menu audio
-]
-    
+// --[ AUDIO SETTINGS ]--
 global.menuaudio = [
-'https://c.termai.cc/a190/FLdf.mp3'
+'https://files.catbox.moe/hrfi2l.mpeg' // ganti aja
 ]
 
-global.stickpack = 'Create By';
+global.menuaudio2 = [
+    'https://files.claidexdigital.tokyo/audios/lgQJFHUK.mp3' // ganti aja
+];
+
+
+global.stickpack = 'Create By'; 
 global.stickauth = namebot;
 
 global.multiplier = 38;
