@@ -1,6 +1,6 @@
 {
   "name": "ʟɪ sʜɪʏᴀ-ᴍᴅ",
-  "version": "1.0.8",
+  "version": "1.0.5",
   "description": "WhatsApp Multi-Device bot built with Baileys.",
   "main": "index.js",
   "type": "module",
@@ -17,13 +17,13 @@
     "lint": "eslint . --ext .js"
   },
   "author": "Its-Lynx",
-  "homepage": "https://github.com/Lynxcode-id/Li-Shiya-MD#readme",
+  "homepage": "https://github.com/Lynxcode-id/ERINE-MD#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Lynxcode-id/Li-Shiya-MD.git"
+    "url": "git+https://github.com/Lynxcode-id/ERINE-MD.git"
   },
   "bugs": {
-    "url": "https://github.com/Lynxcode-id/Li-Shiya-MD/issues"
+    "url": "https://github.com/Lynxcode-id/ERINE-MD/issues"
   },
   "keywords": [
     "termux-whatsapp-bot",
