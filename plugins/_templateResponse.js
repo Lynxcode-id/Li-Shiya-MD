@@ -3,8 +3,6 @@ import { proto, generateWAMessage, areJidsSameUser } from 'baileys';
 export async function all(m, chatUpdate) {
 	if (m.isBaileys) return;
 	if (!m.message) return;
-	
-    // 🔥 FIX: interactiveResponseMessage dihapus dari sini biar gak double respons! 🔥
 	if (!(m.message.buttonsResponseMessage || m.message.templateButtonReplyMessage || m.message.listResponseMessage || m.message.pollUpdateMessage)) return;
 
 	let id =
