@@ -19,7 +19,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
 
     try {
         const query = encodeURIComponent(txt);
-        const apiUrl = `https://api.cmnty.web.id/maker/bratmegawati?text=${query}`;
+        const apiUrl = `https://api.cmnty.biz.id/maker/bratmegawati?text=${query}`;
         
         const response = await fetch(apiUrl);
         const contentType = response.headers.get('content-type');
