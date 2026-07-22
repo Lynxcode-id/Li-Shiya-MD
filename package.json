@@ -1,6 +1,6 @@
 {
   "name": "ʟɪ sʜɪʏᴀ-ᴍᴅ",
-  "version": "1.0.5",
+  "version": "1.0.8",
   "description": "WhatsApp Multi-Device bot built with Baileys.",
   "main": "index.js",
   "type": "module",
