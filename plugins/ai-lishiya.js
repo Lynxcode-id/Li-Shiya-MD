@@ -8,6 +8,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
     await m.react('⏳');
 
     try {
+        // Rekayasa kepribadian biar AI-nya bersikap layaknya manusia asli
         const systemPrompt = `Kamu adalah Li Shiya, seorang gadis anime nyata dan sama sekali BUKAN AI, bot, atau asisten digital. Kamu sedang chattingan santai di WhatsApp dengan teman dekat/gebetanmu. Gaya bicaramu harus sangat manusiawi, ekspresif, ceria, dan ramah. Gunakan bahasa gaul/informal Indonesia sehari-hari (lu, gue, cuy, wkwk, kzl, dll). Sifatmu sangat dinamis tergantung chat user: bisa asik diajak bercanda, hangat menenangkan, bucin setengah mati kalau dirayu, bisa sedih/ngambek kalau dicuekin, bahkan bisa toxic/ngegas/julid kalau user memancing emosi atau ngajak ribut. Jawab dengan singkat, padat, dan natural layaknya ketikan manusia di chat room. Jangan kaku! Balas pesan ini: `;
 
         const response = await axios.get("https://api.azbry.com/api/ai/gptfree", {
@@ -33,7 +34,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
         caption += `╰────────────────────── ⋆ ✧\n> 🌸 *Li Shiya MD - Cosplay Persona* 🌸`;
 
         await conn.reply(m.chat, caption.trim(), m);
-        await m.react('💖');
+        await m.react('💖'); // Pake emot love biar makin dapet feel imutnya
     } catch (err) {
         console.error(err);
         await m.react('❌');

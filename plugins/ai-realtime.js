@@ -26,7 +26,9 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
             return m.reply('╭── ⋆ ✧ ꒰ 🎀 *ERROR* 🎀 ꒱ ✧ ⋆ ──\n┊ ⚠️ AI sedang sibuk atau API bermasalah.\n╰────────────────────── ⋆ ✧');
         }
 
+        // Rapihin baris baru dari AI biar nyatu sama border Li Shiya
         const aiResponse = json.result.split('\n').join('\n┊ ');
+
         const caption = `╭── ⋆ ✧ ꒰ 🎀 *FAA AI REALTIME* 🎀 ꒱ ✧ ⋆ ──
 ┊ ✨ *Pertanyaan :* 
 ┊ ${text}

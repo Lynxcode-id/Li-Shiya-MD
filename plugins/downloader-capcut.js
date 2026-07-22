@@ -12,6 +12,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
         return m.reply(`╭── ⋆ ✧ ꒰ 🎀 *INFO* 🎀 ꒱ ✧ ⋆ ──\n┊ 🌸 Masukkan URL template CapCut yang ingin di-download!\n┊ ☁️ Contoh: *${usedPrefix + command} https://www.capcut.com/tv2/ZSQANHeT9/*\n╰────────────────────── ⋆ ✧`);
     }
 
+    // Validasi sederhana untuk memastikan URL dari capcut
     if (!text.includes('capcut.com/')) {
         return m.reply('╭── ⋆ ✧ ꒰ 🎀 *INFO* 🎀 ꒱ ✧ ⋆ ──\n┊ ⚠️ URL yang dimasukkan harus merupakan tautan dari CapCut!\n╰────────────────────── ⋆ ✧');
     }
@@ -37,6 +38,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
 > 🌸 *Li Shiya MD - Downloader* 🌸`.trim();
 
         if (data.download_video) {
+            // Mengirimkan video hasil download beserta caption detailnya
             await conn.sendMessage(m.chat, { 
                 video: { url: data.download_video }, 
                 caption: caption 

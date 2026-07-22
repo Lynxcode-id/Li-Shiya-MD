@@ -20,15 +20,21 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
     try {
         const query = encodeURIComponent(txt);
         const apiUrl = `https://api-faa.my.id/faa/brathd?text=${query}`;
+        
+        // Fetch image langsung dari API
         const response = await fetch(apiUrl);
         if (!response.ok) throw new Error("Gagal mengambil gambar dari API.");
         
+        // Jadikan Buffer
         const rawBuffer = Buffer.from(await response.arrayBuffer());
+
+        // Convert ke stiker menggunakan konfigurasi Starseal
         const stickerBuffer = await create(rawBuffer, {
             packName: global.stickpack || 'Brat HD',
             publisherName: global.stickauth || 'Li Shiya MD'
         }).toBuffer();
 
+        // Kirim hasil stiker
         await conn.sendMessage(m.chat, { sticker: stickerBuffer }, { quoted: m });
         await m.react('✅');
 

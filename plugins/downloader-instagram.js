@@ -1,84 +1,81 @@
-/**
- * ───「 FEATURE AUTHOR 」───
- * 👤 Developer : Lynx Decode
- * ─────────────────────────
- * 📝 Plugin : Instagram Downloader (Li Shiya UI)
- */
+import fetch from 'node-fetch'
 
-import fetch from 'node-fetch';
+const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
 
-const handler = async (m, { conn, args, usedPrefix, command }) => {
-    if (!args[0]) {
-        return m.reply(`╭── ⋆ ✧ ꒰ 🎀 *INFO* 🎀 ꒱ ✧ ⋆ ──\n┊ 🌸 Masukkan URL Instagram yang valid!\n┊ ☁️ Contoh: *${usedPrefix + command} https://www.instagram.com/reel/xxxx/*\n╰────────────────────── ⋆ ✧`);
+let handler = async (m, { conn, usedPrefix, command, text }) => {
+    if (!text) {
+        return m.reply(`╭── ⋆ ✧ ꒰ 🎀 *INFO* 🎀 ꒱ ✧ ⋆ ──\n┊ 🌸 Masukkan link Instagram yang ingin diunduh!\n┊ ☁️ Contoh: *${usedPrefix + command} https://www.instagram.com/p/...*\n╰────────────────────── ⋆ ✧`)
     }
 
-    if (!/instagram\.com/i.test(args[0])) {
-        return m.reply(`╭── ⋆ ✧ ꒰ 🎀 *ERROR* 🎀 ꒱ ✧ ⋆ ──\n┊ ⚠️ URL tidak valid! Harap masukkan link Instagram yang benar.\n╰────────────────────── ⋆ ✧`);
+    if (!text.includes('instagram.com')) {
+        return m.reply(`⚠️ Link tidak valid! Pastikan itu adalah link dari Instagram.`)
     }
 
-    await m.react('⏳');
+    await m.react('⏳')
 
     try {
-        const url = args[0];
-        const apiUrl = `https://api.jagoanproject.com/api/downloader/instagram?url=${encodeURIComponent(url)}`;
-        
-        const response = await fetch(apiUrl, {
+        let apiUrl = `https://api.jagoanproject.com/api/downloader/instagram?url=${encodeURIComponent(text)}`
+        let response = await fetch(apiUrl, {
             headers: {
-                'Authorization': 'Bearer Lynxdecode',
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
-                'Accept': 'application/json'
+                'Authorization': 'Bearer Lynxdecode'
             }
-        });
+        })
+        
+        let json = await response.json()
 
-        const json = await response.json();
-
-        if (!json.status || !json.result) {
-            await m.react('❌');
-            return m.reply('╭── ⋆ ✧ ꒰ 🎀 *ERROR* 🎀 ꒱ ✧ ⋆ ──\n┊ ⚠️ Gagal mengambil data dari Instagram. Pastikan postingan tidak di-private.\n╰────────────────────── ⋆ ✧');
+        if (!json.status || !json.result || !json.result.media || !json.result.media.slides) {
+            throw new Error("Gagal mengambil data dari server. Pastikan akun tidak diprivate.")
         }
 
-        const { metadata, author, media } = json.result;
-        const captionText = metadata.caption || '_Tanpa Caption_';
-        const username = author.username || 'Unknown';
-        const fullName = author.fullName || 'No Name';
-        const likeCount = metadata.likeCount || 0;
-        const commentCount = metadata.commentCount || 0;
+        let slides = json.result.media.slides
+        let metadata = json.result.metadata || {}
+        let author = json.result.author || {}
 
-        const caption = `╭── ⋆ ✧ ꒰ 🎀 *INSTAGRAM DOWNLOADER* 🎀 ꒱ ✧ ⋆ ──
-┊ 👤 *Uploader* : ${fullName} (@${username})
-┊ 📝 *Caption* : ${captionText}
-┊ ❤️ *Likes* : ${likeCount.toLocaleString()}
-┊ 💬 *Comments* : ${commentCount.toLocaleString()}
-╰────────────────────── ⋆ ✧
-> 🌸 *Li Shiya MD - Instagram Downloader* 🌸`.trim();
-
-        if (metadata.isVideo && media.videos && media.videos.length > 0) {
-            const videoUrl = media.videos[0].url;
-            await conn.sendMessage(m.chat, { 
-                video: { url: videoUrl }, 
-                caption: caption 
-            }, { quoted: m });
-        } else if (media.thumbnail) {
-            await conn.sendMessage(m.chat, { 
-                image: { url: media.thumbnail }, 
-                caption: caption 
-            }, { quoted: m });
-        } else {
-            throw new Error("Media url tidak ditemukan.");
+        let mediaList = []
+        for (let slide of slides) {
+            if (slide.videos && slide.videos.length > 0) {
+                mediaList.push({ type: 'video', url: slide.videos[0].url })
+            } else if (slide.images && slide.images.length > 0) {
+                mediaList.push({ type: 'image', url: slide.images[0].url })
+            }
         }
 
-        await m.react('✅');
+        if (mediaList.length === 0) {
+            throw new Error("Tidak ada media yang ditemukan pada postingan tersebut.")
+        }
 
-    } catch (e) {
-        console.error(e);
-        await m.react('❌');
-        m.reply('╭── ⋆ ✧ ꒰ 🎀 *ERROR* 🎀 ꒱ ✧ ⋆ ──\n┊ ⚠️ Terjadi kesalahan saat memproses link Instagram tersebut.\n╰────────────────────── ⋆ ✧');
+        for (let media of mediaList) {
+            if (media.type === 'video') {
+                await conn.sendMessage(m.chat, { video: { url: media.url } }, { quoted: m })
+            } else {
+                await conn.sendMessage(m.chat, { image: { url: media.url } }, { quoted: m })
+            }
+            await sleep(1500)
+        }
+
+        let captionText = `╭── ⋆ ✧ ꒰ 🎀 *IG DOWNLOADER* 🎀 ꒱ ✧ ⋆ ──\n`
+        captionText += `┊ 👤 *Username:* @${author.username || 'unknown'}\n`
+        if (metadata.likeCount !== undefined) captionText += `┊ ❤️ *Likes:* ${metadata.likeCount}\n`
+        if (metadata.commentCount !== undefined) captionText += `┊ 💬 *Comments:* ${metadata.commentCount}\n`
+        captionText += `╰────────────────────── ⋆ ✧\n\n`
+        
+        let originalCaption = metadata.caption ? metadata.caption.trim() : '-'
+        captionText += `> 📝 *Caption:*\n${originalCaption}\n\n`
+        captionText += `> 🌸 *Li Shiya MD - Downloader* 🌸`
+
+        await conn.sendMessage(m.chat, { text: captionText.trim() }, { quoted: m })
+
+        await m.react('✅')
+    } catch (err) {
+        console.error(err)
+        await m.react('❌')
+        m.reply(`╭── ⋆ ✧ ꒰ 🎀 *ERROR* 🎀 ꒱ ✧ ⋆ ──\n┊ ⚠️ Gagal memproses tautan.\n┊ _${err.message || 'API Sedang Down'}_\n╰────────────────────── ⋆ ✧`)
     }
-};
+}
 
-handler.help = ['instagram <url>', 'ig <url>', 'igreels <url>'];
-handler.tags = ['downloader'];
-handler.command = /^(instagram|ig|igreels)$/i;
-handler.limit = true;
+handler.help = ['ig', 'instagramdl']
+handler.tags = ['downloader']
+handler.command = /^(ig|instagramdl)$/i
+handler.limit = true
 
-export default handler;
+export default handler
