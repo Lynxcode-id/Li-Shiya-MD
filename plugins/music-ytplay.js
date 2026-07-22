@@ -28,7 +28,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
         await conn.sendMessage(m.chat, { image: { url: video.thumbnail }, caption: caption }, { quoted: m });
 
         const apikey = 'x34J0'; 
-        const apiUrl = `https://api.theresav.biz.id/download/ytmp3/v2?url=${encodeURIComponent(video.url)}&bitrate=128&apikey=${apikey}`;
+        const apiUrl = `https://api.blckrose.my.id/download/ytmp3/v2?url=${encodeURIComponent(video.url)}&bitrate=128&apikey=${apikey}`;
 
         const response = await fetch(apiUrl);
         const json = await response.json();
