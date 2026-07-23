@@ -1,0 +1,81 @@
+import fetch from 'node-fetch'
+
+let timeout = 120000
+
+let handler = async (m, { conn, usedPrefix }) => {
+    conn.tebakkalimat = conn.tebakkalimat ? conn.tebakkalimat : {}
+    let id = m.chat
+    
+    if (id in conn.tebakkalimat) {
+        return conn.reply(m.chat, '⚠️ Masih ada soal belum terjawab di chat ini!', conn.tebakkalimat[id][0])
+    }
+    
+    await m.react('⏳')
+    
+    try {
+        let res = await fetch('https://api.jagoanproject.com/api/game/tebakkalimat', {
+            headers: { 'Authorization': 'Bearer Lynxdecode' }
+        })
+        let json = await res.json()
+        
+        if (!json.status || !json.result) throw new Error('API Error')
+        
+        let data = json.result
+        let poin = Math.floor(Math.random() * 100) + 1
+        
+        let caption = `╭── ⋆ ✧ ꒰ 🎀 *TEBAK KALIMAT* 🎀 ꒱ ✧ ⋆ ──\n`
+        caption += `┊ 🌸 *Soal:* ${data.soal}\n`
+        caption += `┊ ⏱️ *Waktu:* ${(timeout / 1000)} detik\n`
+        caption += `┊ 🎁 *Hadiah:* ${poin} XP\n`
+        caption += `┊ ☁️ *Balas pesan ini untuk menjawab!*\n`
+        caption += `╰────────────────────── ⋆ ✧\n> 🌸 *Li Shiya MD - Game* 🌸`
+        
+        let msg = await m.reply(caption)
+        
+        conn.tebakkalimat[id] = [
+            msg,
+            data,
+            poin,
+            setTimeout(() => {
+                if (conn.tebakkalimat[id]) {
+                    conn.reply(m.chat, `╭── ⋆ ✧ ꒰ 🎀 *WAKTU HABIS* 🎀 ꒱ ✧ ⋆ ──\n┊ 🌸 *Jawaban:* ${data.jawaban}\n╰────────────────────── ⋆ ✧`, conn.tebakkalimat[id][0])
+                    delete conn.tebakkalimat[id]
+                }
+            }, timeout)
+        ]
+        
+        await m.react('✅')
+    } catch (err) {
+        console.error(err)
+        await m.react('❌')
+        m.reply(`╭── ⋆ ✧ ꒰ 🎀 *ERROR* 🎀 ꒱ ✧ ⋆ ──\n┊ ⚠️ Gagal mengambil soal.\n┊ _${err.message || 'API Sedang Down'}_\n╰────────────────────── ⋆ ✧`)
+    }
+}
+
+handler.before = async function (m, { conn }) {
+    conn.tebakkalimat = conn.tebakkalimat ? conn.tebakkalimat : {}
+    let id = m.chat
+    
+    if (!m.quoted || !m.text || !/TEBAK KALIMAT/i.test(m.quoted.text)) return false
+    if (!(id in conn.tebakkalimat)) return false
+    
+    if (m.quoted.id == conn.tebakkalimat[id][0].id) {
+        let json = conn.tebakkalimat[id][1]
+        if (m.text.toLowerCase().trim() === json.jawaban.toLowerCase().trim()) {
+            global.db.data.users[m.sender].exp += conn.tebakkalimat[id][2]
+            m.reply(`╭── ⋆ ✧ ꒰ 🎀 *BENAR!* 🎀 ꒱ ✧ ⋆ ──\n┊ 🎉 *Jawaban:* ${json.jawaban}\n┊ 🎁 *Bonus:* +${conn.tebakkalimat[id][2]} XP\n╰────────────────────── ⋆ ✧\n> 🌸 *Li Shiya MD - Game* 🌸`)
+            clearTimeout(conn.tebakkalimat[id][3])
+            delete conn.tebakkalimat[id]
+        } else {
+            m.reply('❌ *Salah!* Coba lagi.')
+        }
+        return true
+    }
+    return false
+}
+
+handler.help = ['tebakkalimat']
+handler.tags = ['game']
+handler.command = /^(tebakkalimat)$/i
+
+export default handler
