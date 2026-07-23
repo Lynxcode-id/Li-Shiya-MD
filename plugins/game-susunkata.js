@@ -1,0 +1,82 @@
+import fetch from 'node-fetch'
+
+let timeout = 120000
+
+let handler = async (m, { conn, usedPrefix }) => {
+    conn.susunkata = conn.susunkata ? conn.susunkata : {}
+    let id = m.chat
+    
+    if (id in conn.susunkata) {
+        return conn.reply(m.chat, '⚠️ Masih ada soal belum terjawab di chat ini!', conn.susunkata[id][0])
+    }
+    
+    await m.react('⏳')
+    
+    try {
+        let res = await fetch('https://api.jagoanproject.com/api/game/susunkata', {
+            headers: { 'Authorization': 'Bearer Lynxdecode' }
+        })
+        let json = await res.json()
+        
+        if (!json.status || !json.result) throw new Error('API Error')
+        
+        let data = json.result
+        let poin = Math.floor(Math.random() * 100) + 1
+        
+        let caption = `╭── ⋆ ✧ ꒰ 🎀 *SUSUN KATA* 🎀 ꒱ ✧ ⋆ ──\n`
+        caption += `┊ 🌸 *Soal:* ${data.soal}\n`
+        caption += `┊ 💡 *Tipe:* ${data.tipe}\n`
+        caption += `┊ ⏱️ *Waktu:* ${(timeout / 1000)} detik\n`
+        caption += `┊ 🎁 *Hadiah:* ${poin} XP\n`
+        caption += `┊ ☁️ *Balas pesan ini untuk menjawab!*\n`
+        caption += `╰────────────────────── ⋆ ✧\n> 🌸 *Li Shiya MD - Game* 🌸`
+        
+        let msg = await m.reply(caption)
+        
+        conn.susunkata[id] = [
+            msg,
+            data,
+            poin,
+            setTimeout(() => {
+                if (conn.susunkata[id]) {
+                    conn.reply(m.chat, `╭── ⋆ ✧ ꒰ 🎀 *WAKTU HABIS* 🎀 ꒱ ✧ ⋆ ──\n┊ 🌸 *Jawaban:* ${data.jawaban}\n╰────────────────────── ⋆ ✧`, conn.susunkata[id][0])
+                    delete conn.susunkata[id]
+                }
+            }, timeout)
+        ]
+        
+        await m.react('✅')
+    } catch (err) {
+        console.error(err)
+        await m.react('❌')
+        m.reply(`╭── ⋆ ✧ ꒰ 🎀 *ERROR* 🎀 ꒱ ✧ ⋆ ──\n┊ ⚠️ Gagal mengambil soal.\n┊ _${err.message || 'API Sedang Down'}_\n╰────────────────────── ⋆ ✧`)
+    }
+}
+
+handler.before = async function (m, { conn }) {
+    conn.susunkata = conn.susunkata ? conn.susunkata : {}
+    let id = m.chat
+    
+    if (!m.quoted || !m.text || !/SUSUN KATA/i.test(m.quoted.text)) return false
+    if (!(id in conn.susunkata)) return false
+    
+    if (m.quoted.id == conn.susunkata[id][0].id) {
+        let json = conn.susunkata[id][1]
+        if (m.text.toLowerCase().trim() === json.jawaban.toLowerCase().trim()) {
+            global.db.data.users[m.sender].exp += conn.susunkata[id][2]
+            m.reply(`╭── ⋆ ✧ ꒰ 🎀 *BENAR!* 🎀 ꒱ ✧ ⋆ ──\n┊ 🎉 *Jawaban:* ${json.jawaban}\n┊ 🎁 *Bonus:* +${conn.susunkata[id][2]} XP\n╰────────────────────── ⋆ ✧\n> 🌸 *Li Shiya MD - Game* 🌸`)
+            clearTimeout(conn.susunkata[id][3])
+            delete conn.susunkata[id]
+        } else {
+            m.reply('❌ *Salah!* Coba lagi.')
+        }
+        return true
+    }
+    return false
+}
+
+handler.help = ['susunkata']
+handler.tags = ['game']
+handler.command = /^(susunkata)$/i
+
+export default handler
