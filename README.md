@@ -270,6 +270,8 @@ Li Shiya MD/
 - Script bot ini di rancang agar stabil dan ringan serta fast, kami tidak mengejar banyak plugin di bot ini jadi jangan berharap banyak !
 - Script bot ini juga memakai sistem load plugin agar penggunaan, cpu dan ram supaya tidak jebol/terlalu tinggi
 - Terima kasih juga untuk penyedia baileys dan base script ini
+- Memakai script bot whatsapp ini berarti, anda siap dengan segala resiko yang akan di timbulkan! kami sudah mengingatkan dari awal ya..!
+- 100% Safe No backdoor!, owner kami tidak sejahat itu.
 
 ---
 
