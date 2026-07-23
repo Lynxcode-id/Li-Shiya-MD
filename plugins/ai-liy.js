@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+let chatCooldowns = new Map();
+
 let handler = async (m, { conn, text, usedPrefix, command }) => {
     global.db.data.chats = global.db.data.chats || {};
     let chat = global.db.data.chats[m.chat] = global.db.data.chats[m.chat] || {};
@@ -17,14 +19,11 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
         return m.reply('╭── ⋆ ✧ ꒰ 🎀 *AUTO AI* 🎀 ꒱ ✧ ⋆ ──\n┊ 💤 Berhasil *MEMATIKAN* Auto AI di chat ini.\n╰────────────────────── ⋆ ✧');
     }
 
-    let q = m.quoted ? m.quoted : m;
-    let mime = (q.msg || q).mimetype || '';
-
-    if (!text && !mime.startsWith('image/')) {
-        return m.reply(`╭── ⋆ ✧ ꒰ 🎀 *INFO* 🎀 ꒱ ✧ ⋆ ──\n┊ 🌸 Masukkan pertanyaan, balas gambar, atau ketik *${usedPrefix + command} on / off*!\n┊ ☁️ Contoh: *${usedPrefix + command} on* (untuk aktifin auto chat)\n╰────────────────────── ⋆ ✧`);
+    if (!text) {
+        return m.reply(`╭── ⋆ ✧ ꒰ 🎀 *INFO* 🎀 ꒱ ✧ ⋆ ──\n┊ 🌸 Masukkan pertanyaan atau ketik *${usedPrefix + command} on / off*!\n┊ ☁️ Contoh: *${usedPrefix + command} halo* atau *${usedPrefix + command} on*\n╰────────────────────── ⋆ ✧`);
     }
 
-    await processAIResponse(m, conn, text, q, mime);
+    await processAIResponse(m, text);
 };
 
 handler.before = async function (m, { conn }) {
@@ -38,82 +37,38 @@ handler.before = async function (m, { conn }) {
     let prefix = /^[°•π÷×¶∆£¢€¥®™+=|~<>;,!#./?-]/;
     if (prefix.test(m.text)) return;
 
-    let q = m.quoted ? m.quoted : m;
-    let mime = (q.msg || q).mimetype || '';
+    let now = Date.now();
+    let cooldownTime = 3000;
+    if (chatCooldowns.has(m.chat)) {
+        let lastTime = chatCooldowns.get(m.chat);
+        if (now - lastTime < cooldownTime) return;
+    }
+    chatCooldowns.set(m.chat, now);
 
-    await processAIResponse(m, conn, m.text, q, mime);
+    await processAIResponse(m, m.text);
     return true;
 };
 
-async function processAIResponse(m, conn, text, q, mime) {
+async function processAIResponse(m, text) {
     await m.react('🌼');
 
     try {
-        const apiKey = "AIzaSyBBgURzZMz30vQPPDL6A0VddgaupMS_Oxo";
-        let parts = [];
-        
-        if (text) {
-            parts.push({ text: text.trim() });
-        } else if (mime.startsWith('image/')) {
-            parts.push({ text: "Tolong jelaskan gambar ini secara detail dan menyeluruh." });
-        }
-
-        if (mime.startsWith('image/')) {
-            let media = await q.download();
-            parts.push({
-                inline_data: {
-                    mime_type: mime,
-                    data: media.toString('base64')
-                }
-            });
-        }
-
-        const payload = {
-            system_instruction: {
-                parts: { 
-                    text: "Kamu adalah asisten lynx super cerdas, logis, dan ahli dalam problem-solving. Berikan jawaban yang terstruktur, komprehensif, dan secepat mungkin Gunakan bahasa Indonesia kek manusia biasa bisa marah dan emosi bahagia dan senang bertingkahlah selayaknya perempuan remaja yang random." 
-                }
-            },
-            contents: [{
-                parts: parts
-            }],
-            generationConfig: {
-                temperature: 0.7,
-                topK: 40,
-                topP: 0.95,
-                maxOutputTokens: 65536,
-            }
-        };
+        let encodedQuery = encodeURIComponent(text.trim());
+        let url = `https://api.kaicloud.my.id/api/ai/unlimited?q=${encodedQuery}`;
 
         const headers = {
-            'Content-Type': 'application/json',
+            'accept': 'application/json',
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36'
         };
 
-        let answer = '';
-        let usedModel = 'Gemini 3.5 Flash';
+        const { data } = await axios.get(url, { headers, timeout: 30000 });
 
-        try {
-            const url35 = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=${apiKey}`;
-            const { data } = await axios.post(url35, payload, { headers, timeout: 60000 });
-            
-            if (!data?.candidates || !data.candidates[0]?.content?.parts?.[0]?.text) {
-                throw new Error("Respons kosong dari Gemini 3.5 Flash.");
-            }
-            answer = data.candidates[0].content.parts[0].text.trim();
-
-        } catch (err35) {
-            console.error("Gemini 3.5 Flash Error, Fallback ke 3.1 Flash-Lite...", err35.message);
-            
-            usedModel = 'Gemini 3.1 Flash-Lite';
-            const url31 = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent?key=${apiKey}`;
-            const { data } = await axios.post(url31, payload, { headers, timeout: 60000 });
-
-            if (!data?.candidates || !data.candidates[0]?.content?.parts?.[0]?.text) {
-                throw new Error("Gagal mendapatkan respons dari semua model Gemini.");
-            }
-            answer = data.candidates[0].content.parts[0].text.trim();
+        if (!data?.status || !data?.data?.response) {
+            throw new Error("Respons kosong dari server AI.");
         }
+
+        let answer = data.data.response.trim();
+        let usedModel = data.data.model_used || 'chat-model-reasoning';
 
         const header = `╭── ⋆ ✧ ꒰ 🎀 *${usedModel.toUpperCase()}* 🎀 ꒱ ✧ ⋆ ──\n\n`;
         const footer = `\n\n╰────────────────────── ⋆ ✧\n\n> 🌸 *Li Shiya MD - Advanced AI Tools* 🌸`;
@@ -123,12 +78,12 @@ async function processAIResponse(m, conn, text, q, mime) {
     } catch (err) {
         console.error(err);
         await m.react('❌');
-        const errorMessage = err?.response?.data?.error?.message || err.message;
+        let errorMessage = err?.response?.data?.message || err.message;
         await m.reply(`╭── ⋆ ✧ ꒰ 🎀 *ERROR* 🎀 ꒱ ✧ ⋆ ──\n┊ ⚠️ AI sedang mengalami kendala.\n┊ _${errorMessage}_\n╰────────────────────── ⋆ ✧`);
     }
 }
 
-handler.help = ['liy <query/image>', 'liy on', 'lishiya off'];
+handler.help = ['liy <query>', 'liy on', 'liy off'];
 handler.tags = ['ai'];
 handler.command = /^(liy)$/i;
 handler.limit = true;
