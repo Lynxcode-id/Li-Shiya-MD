@@ -2,7 +2,7 @@
   <img src="media/1784468229462.png" alt="Li Shiya MD Banner" width="450"/>
 </p>
 
-<h1 align="center">🎀 Li Shiya MD v1.0.8 (Multi-Device) 🎀</h1>
+<h1 align="center">🎀 Li Shiya MD v1.1.3 (Multi-Device) 🎀</h1>
 
 <p align="center">
   <em>WhatsApp Bot dengan kepribadian AI ala gadis anime, ringan, dan modular.</em>
