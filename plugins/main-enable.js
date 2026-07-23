@@ -66,6 +66,7 @@ ${
 - autoread
 - self
 - anticall
+- gconly
 `
 		: ''
 }
