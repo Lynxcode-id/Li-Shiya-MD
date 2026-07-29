@@ -109,8 +109,8 @@
 ### 1️⃣ Kloning Repositori
 
 ```bash
-git clone https://github.com/AgusXzz/ChiiMD.git
-cd ChiiMD
+git clone https://github.com/AgusXzz/Li-Shiya-MD.git
+cd Li-Shiya-MD
 ```
 
 ### 2️⃣ Instalasi Dependensi
