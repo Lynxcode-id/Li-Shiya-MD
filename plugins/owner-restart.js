@@ -1,16 +1,1 @@
-import { parentPort } from 'worker_threads';
-
-let handler = async (m, { conn }) => {
-	if (!parentPort) throw 'Dont: node main.js\nDo: node index.js';
-	if (global.conn.user.jid == conn.user.jid) {
-		await m.reply('```R E S T A R T . . .```');
-		parentPort.postMessage('restart');
-	} else throw '_eeeeeiiittsssss..._';
-};
-
-handler.help = ['restart'];
-handler.tags = ['owner'];
-handler.command = /^(res(tart)?)$/i;
-handler.owner = true;
-
-export default handler;
+function _0x1f5a(_0x38bb7e,_0x87e420){_0x38bb7e=_0x38bb7e-0x120;const _0x5326f9=_0x5326();let _0x1f5a69=_0x5326f9[_0x38bb7e];return _0x1f5a69;}const _0xd1ba01=_0x1f5a;(function(_0x217721,_0x3ed031){const _0x232395=_0x1f5a,_0x18150c=_0x217721();while(!![]){try{const _0x2b9c32=parseInt(_0x232395(0x132))/0x1+-parseInt(_0x232395(0x134))/0x2*(parseInt(_0x232395(0x127))/0x3)+parseInt(_0x232395(0x12f))/0x4*(parseInt(_0x232395(0x120))/0x5)+-parseInt(_0x232395(0x125))/0x6+-parseInt(_0x232395(0x133))/0x7+-parseInt(_0x232395(0x12c))/0x8*(-parseInt(_0x232395(0x12b))/0x9)+parseInt(_0x232395(0x122))/0xa;if(_0x2b9c32===_0x3ed031)break;else _0x18150c['push'](_0x18150c['shift']());}catch(_0x3da2ed){_0x18150c['push'](_0x18150c['shift']());}}}(_0x5326,0x3d1a5));function _0x5326(){const _0x15d78c=['426169BYpnZG','2833824motsJd','229594zQAmSq','879785IwiVof','FLgLZ','2155830zDeLKD','user','reply','868956ZvTwGd','tags','6sFSzwt','Dont:\x20node\x20main.js\x0aDo:\x20node\x20index.js','restart','owner','272340xlJzkB','56DovxqT','oUhEb','command','4AizvXB','_eeeeeiiittsssss..._','Zvzqh'];_0x5326=function(){return _0x15d78c;};return _0x5326();}import{parentPort}from'worker_threads';let _0x44ff71=async(_0x46f2e4,{conn:_0xda36a6})=>{const _0x279651=_0x1f5a,_0x4d26b9={'FLgLZ':function(_0x22956b,_0x163e2d){return _0x22956b==_0x163e2d;},'oUhEb':'```R\x20E\x20S\x20T\x20A\x20R\x20T\x20.\x20.\x20.```','Zvzqh':'restart','TtOvS':_0x279651(0x130)};if(!parentPort)throw _0x279651(0x128);if(_0x4d26b9[_0x279651(0x121)](global['conn'][_0x279651(0x123)]['jid'],_0xda36a6[_0x279651(0x123)]['jid']))await _0x46f2e4[_0x279651(0x124)](_0x4d26b9[_0x279651(0x12d)]),parentPort['postMessage'](_0x4d26b9[_0x279651(0x131)]);else throw _0x4d26b9['TtOvS'];};_0x44ff71['help']=[_0xd1ba01(0x129)],_0x44ff71[_0xd1ba01(0x126)]=[_0xd1ba01(0x12a)],_0x44ff71[_0xd1ba01(0x12e)]=/^(res(tart)?)$/i,_0x44ff71[_0xd1ba01(0x12a)]=!![];export default _0x44ff71;

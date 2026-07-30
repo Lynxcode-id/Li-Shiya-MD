@@ -1,15 +1,1 @@
-import { createHash } from 'crypto';
-let handler = async function (m, { args }) {
-	if (!args[0]) throw 'Serial Number kosong';
-	let user = global.db.data.users[m.sender];
-	let sn = createHash('md5').update(m.sender).digest('hex');
-	if (args[0] !== sn) throw 'Serial Number salah';
-	user.registered = false;
-	m.reply('```Success Unreg !```');
-};
-handler.help = ['unregister <SN|SERIAL NUMBER>'];
-handler.tags = ['xp'];
-handler.command = /^unreg(ister)?$/i;
-handler.register = true;
-
-export default handler;
+const _0x4d7811=_0x3a7b;(function(_0x21eaf4,_0x3ceccf){const _0x3b0893=_0x3a7b,_0x14aa92=_0x21eaf4();while(!![]){try{const _0x423bae=-parseInt(_0x3b0893(0x148))/0x1+parseInt(_0x3b0893(0x14b))/0x2*(-parseInt(_0x3b0893(0x152))/0x3)+parseInt(_0x3b0893(0x149))/0x4+-parseInt(_0x3b0893(0x15a))/0x5*(-parseInt(_0x3b0893(0x14d))/0x6)+parseInt(_0x3b0893(0x146))/0x7*(parseInt(_0x3b0893(0x153))/0x8)+parseInt(_0x3b0893(0x14e))/0x9+-parseInt(_0x3b0893(0x14c))/0xa*(parseInt(_0x3b0893(0x144))/0xb);if(_0x423bae===_0x3ceccf)break;else _0x14aa92['push'](_0x14aa92['shift']());}catch(_0x31dcd6){_0x14aa92['push'](_0x14aa92['shift']());}}}(_0x1291,0xd8d37));function _0x3a7b(_0x1432e1,_0x5b4664){_0x1432e1=_0x1432e1-0x143;const _0x129136=_0x1291();let _0x3a7b3b=_0x129136[_0x1432e1];return _0x3a7b3b;}import{createHash}from'crypto';let _0x72ff41=async function(_0x87d7e9,{args:_0x3b2725}){const _0xfb0cad=_0x3a7b,_0x56931a={'GNmMv':_0xfb0cad(0x151),'yupvS':_0xfb0cad(0x14a),'TxuJK':function(_0x238d62,_0x496c37){return _0x238d62!==_0x496c37;},'GvMOZ':_0xfb0cad(0x150),'BOjFM':_0xfb0cad(0x14f)};if(!_0x3b2725[0x0])throw _0xfb0cad(0x15d);let _0x157072=global['db']['data']['users'][_0x87d7e9['sender']],_0x1cd10d=createHash(_0x56931a[_0xfb0cad(0x15b)])[_0xfb0cad(0x147)](_0x87d7e9['sender'])[_0xfb0cad(0x156)](_0x56931a[_0xfb0cad(0x158)]);if(_0x56931a[_0xfb0cad(0x155)](_0x3b2725[0x0],_0x1cd10d))throw _0x56931a[_0xfb0cad(0x154)];_0x157072[_0xfb0cad(0x157)]=![],_0x87d7e9[_0xfb0cad(0x145)](_0x56931a[_0xfb0cad(0x143)]);};_0x72ff41[_0x4d7811(0x15f)]=[_0x4d7811(0x159)],_0x72ff41[_0x4d7811(0x15e)]=['xp'],_0x72ff41[_0x4d7811(0x15c)]=/^unreg(ister)?$/i,_0x72ff41['register']=!![];function _0x1291(){const _0x37f1d2=['registered','yupvS','unregister\x20<SN|SERIAL\x20NUMBER>','1483415XGjZte','GNmMv','command','Serial\x20Number\x20kosong','tags','help','BOjFM','2343HbUgQc','reply','43288COAKox','update','251352HEjwdE','6644544rqaNkx','hex','36908FZSKBY','102920swyTJg','30fVJuSk','12010572QgKiJD','```Success\x20Unreg\x20!```','Serial\x20Number\x20salah','md5','276CcqLjs','712fYxWMm','GvMOZ','TxuJK','digest'];_0x1291=function(){return _0x37f1d2;};return _0x1291();}export default _0x72ff41;
