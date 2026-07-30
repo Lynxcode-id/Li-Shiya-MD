@@ -1,15 +1,1 @@
-let handler = async (m) => {
-	let totalreg = Object.keys(global.db.data.users).length;
-	let rtotalreg = Object.values(global.db.data.users).filter((user) => user.registered == true).length;
-	let kon = `乂 *U S E R*
-    
-╭╾• *Current Database ${totalreg} User*
-=
-╰╾• *Currently Registered ${rtotalreg} User*`;
-	await m.reply(kon);
-};
-handler.help = ['totaluser'];
-handler.tags = ['info'];
-handler.command = /^(pengguna|(jumlah)?database|totaluser)$/i;
-
-export default handler;
+const _0x5d45c8=_0x3e04;function _0x4ce9(){const _0x13c33c=['4309816LrAWkU','乂\x20*U\x20S\x20E\x20R*\x0a\x20\x20\x20\x20\x0a╭╾•\x20*Current\x20Database\x20','users','totaluser','data','reply','\x20User*','length','keys','170080YbLXtC','3555mUZvnx','255120CeHTwx','16kjACne','registered','6OdBelf','33vnONhb','406712nxbhzi','13578iLaqSc','3391920qpNCgd','info','\x20User*\x0a=\x0a╰╾•\x20*Currently\x20Registered\x20','help','5537364dIlyGX'];_0x4ce9=function(){return _0x13c33c;};return _0x4ce9();}(function(_0x46cf60,_0x199eaa){const _0x37268d=_0x3e04,_0x2e6c89=_0x46cf60();while(!![]){try{const _0x4f5479=parseInt(_0x37268d(0x1f3))/0x1*(-parseInt(_0x37268d(0x1df))/0x2)+parseInt(_0x37268d(0x1e1))/0x3*(-parseInt(_0x37268d(0x1e3))/0x4)+parseInt(_0x37268d(0x1f4))/0x5*(parseInt(_0x37268d(0x1e4))/0x6)+parseInt(_0x37268d(0x1e9))/0x7+parseInt(_0x37268d(0x1ea))/0x8+-parseInt(_0x37268d(0x1e5))/0x9+-parseInt(_0x37268d(0x1f5))/0xa*(parseInt(_0x37268d(0x1e2))/0xb);if(_0x4f5479===_0x199eaa)break;else _0x2e6c89['push'](_0x2e6c89['shift']());}catch(_0x25f5da){_0x2e6c89['push'](_0x2e6c89['shift']());}}}(_0x4ce9,0xe0f10));function _0x3e04(_0xf7bae1,_0x52057a){_0xf7bae1=_0xf7bae1-0x1df;const _0x4ce9b2=_0x4ce9();let _0x3e04cc=_0x4ce9b2[_0xf7bae1];return _0x3e04cc;}let _0x291c8e=async _0x5ce393=>{const _0x4539fb=_0x3e04;let _0x360351=Object[_0x4539fb(0x1f2)](global['db'][_0x4539fb(0x1ee)][_0x4539fb(0x1ec)])[_0x4539fb(0x1f1)],_0x55ad7f=Object['values'](global['db']['data'][_0x4539fb(0x1ec)])['filter'](_0x4bfbc6=>_0x4bfbc6[_0x4539fb(0x1e0)]==!![])['length'],_0x35a50a=_0x4539fb(0x1eb)+_0x360351+_0x4539fb(0x1e7)+_0x55ad7f+_0x4539fb(0x1f0);await _0x5ce393[_0x4539fb(0x1ef)](_0x35a50a);};_0x291c8e[_0x5d45c8(0x1e8)]=[_0x5d45c8(0x1ed)],_0x291c8e['tags']=[_0x5d45c8(0x1e6)],_0x291c8e['command']=/^(pengguna|(jumlah)?database|totaluser)$/i;export default _0x291c8e;
