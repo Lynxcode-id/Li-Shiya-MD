@@ -1,15 +1,1 @@
-let handler = async (m) => {
-	let hash;
-	if (m.quoted && m.quoted.fileSha256) hash = m.quoted.fileSha256;
-	if (!hash) throw `Tidak ada hash`;
-	let sticker = global.db.data.sticker;
-	if (sticker[hash] && sticker[hash].locked) throw 'Kamu tidak memiliki izin untuk menghapus perintah stiker ini';
-	delete sticker[hash];
-	m.reply(`Berhasil!`);
-};
-
-handler.help = ['delcmd'];
-handler.tags = ['database'];
-handler.command = ['delcmd'];
-
-export default handler;
+const _0x7add65=_0x559b;(function(_0xb1cdf3,_0x3043f2){const _0x351592=_0x559b,_0x24b904=_0xb1cdf3();while(!![]){try{const _0x231bfe=parseInt(_0x351592(0xe7))/0x1+-parseInt(_0x351592(0xe6))/0x2*(parseInt(_0x351592(0xe1))/0x3)+parseInt(_0x351592(0xef))/0x4+parseInt(_0x351592(0xee))/0x5*(parseInt(_0x351592(0xeb))/0x6)+parseInt(_0x351592(0xe2))/0x7+parseInt(_0x351592(0xe5))/0x8+-parseInt(_0x351592(0xe8))/0x9;if(_0x231bfe===_0x3043f2)break;else _0x24b904['push'](_0x24b904['shift']());}catch(_0x42152c){_0x24b904['push'](_0x24b904['shift']());}}}(_0x93ae,0x3aa08));function _0x559b(_0x209895,_0x293c90){_0x209895=_0x209895-0xdf;const _0x93aed0=_0x93ae();let _0x559b05=_0x93aed0[_0x209895];return _0x559b05;}let _0x391a1c=async _0x568828=>{const _0x2d5142=_0x559b,_0x56a7eb={'BEzbN':_0x2d5142(0xe3)};let _0x3e4da6;if(_0x568828[_0x2d5142(0xed)]&&_0x568828[_0x2d5142(0xed)][_0x2d5142(0xe4)])_0x3e4da6=_0x568828[_0x2d5142(0xed)][_0x2d5142(0xe4)];if(!_0x3e4da6)throw _0x2d5142(0xe9);let _0x11af12=global['db']['data'][_0x2d5142(0xe0)];if(_0x11af12[_0x3e4da6]&&_0x11af12[_0x3e4da6]['locked'])throw _0x56a7eb[_0x2d5142(0xdf)];delete _0x11af12[_0x3e4da6],_0x568828[_0x2d5142(0xea)](_0x2d5142(0xf0));};function _0x93ae(){const _0x59da64=['2155185orAdZd','Tidak\x20ada\x20hash','reply','52986daFEZw','delcmd','quoted','130AuIPsw','295788AnmBAY','Berhasil!','BEzbN','sticker','3XfwikG','662795zRynBj','Kamu\x20tidak\x20memiliki\x20izin\x20untuk\x20menghapus\x20perintah\x20stiker\x20ini','fileSha256','2821280jkUFIy','871198UCDvIj','164302jmfXRG'];_0x93ae=function(){return _0x59da64;};return _0x93ae();}_0x391a1c['help']=[_0x7add65(0xec)],_0x391a1c['tags']=['database'],_0x391a1c['command']=['delcmd'];export default _0x391a1c;
